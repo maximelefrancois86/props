@@ -1,0 +1,46 @@
+PREFIX sgfn:   <http://w3id.org/sparql-generate/fn/>
+PREFIX sgiter: <http://w3id.org/sparql-generate/iter/>
+PREFIX rdfs:   <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX ex:     <http://example.org/>
+PREFIX dcterms:    <http://purl.org/dc/terms/> 
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+BASE <https://w3id.org/product/pset/>
+GENERATE {
+
+#    <https://w3id.org/product/pset/> 
+#        dcterms:modified ?{ now() } ;
+#        dcterms:issued ?{ now() } .
+
+    GENERATE {
+
+    <https://w3id.org/product/pset/> 
+        dcterms:modified "{ now() }"^^xsd:dateTimeStamp ;
+        dcterms:issued "{ now() }"^^xsd:date .
+
+     <https://w3id.org/product/{ substr( sgfn:XPath(?source,"/ApplicableClasses/ClassName") , 3)  }> ex:hasPSet ?pseturi .
+
+     ?pseturi  a <PSet> ;
+        rdfs:label "{ sgfn:XPath(?source,"/PropertySetDef/Name/text()"  ) }"@en ;
+        rdfs:comment "{ sgfn:XPath(?source,"/PropertySetDef/Definition/text()"  ) }"@en .
+
+       GENERATE{
+         <{ sgfn:XPath(?property,"/PropertyDef/Name/text()") }> ex:inPset ?pseturi ;
+           rdfs:label "{ sgfn:XPath(?property,"/PropertyDef/Name/text()") }"@en ;
+           rdfs:comment  "{ sgfn:XPath(?property,"/PropertyDef/Definition/text()") }"@en ;
+
+       } 
+       ITERATOR sgiter:XPath(?source, "//PropertyDef" ) AS ?property
+       WHERE {
+
+       } .
+
+
+   } 
+   SOURCE <replace-with-source-url> AS ?source
+   WHERE {
+     BIND ( <{ substr( sgfn:XPath(?source,"/PropertySetDef/Name/text()") , 6) }> AS ?pseturi )
+   } .
+
+
+} 
