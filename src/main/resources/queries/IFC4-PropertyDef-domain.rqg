@@ -8,9 +8,8 @@ PREFIX owl: <http://www.w3.org/2002/07/owl#>
 PREFIX schema: <http://schema.org/>
 
 BASE <https://w3id.org/product/props/>
+
 GENERATE {
-
-    GENERATE <queries/IFC4-PropertyDef.rqg>
-    ITERATOR sgiter:XPath(?source, "//PropertyDef" ) AS ?property .
-
-} SOURCE <replace-with-source-url> AS ?source 
+  <{ ?name }> schema:domainIncludes <https://w3id.org/product/{ substr( sgfn:XPath(?applicableClass,"/ClassName/text()") , 4)  }> .
+}
+ITERATOR sgiter:XPath(?source,"/PropertySetDef/ApplicableClasses/ClassName") AS ?applicableClass

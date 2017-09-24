@@ -6,6 +6,12 @@
         </Console>
     </Appenders>
     <Loggers>
+        <Logger name="com.github.thesmartenergy.sparql.generate.jena.function.library" level="info">
+            <AppenderRef ref="STDOUT"/>
+        </Logger>
+        <Logger name="com.github.thesmartenergy.sparql.generate.jena.iterator.library" level="info">
+            <AppenderRef ref="STDOUT"/>
+        </Logger>
         <Root level="info">
             <AppenderRef ref="STDOUT"/>
         </Root>

@@ -9,15 +9,15 @@
   <ApplicableTypeValue>IfcAudioVisualAppliance/AMPLIFIER</ApplicableTypeValue>
   <PropertyDefs>
     <PropertyDef ifdguid="d7f6e200d1c111e1800000215ad4efdf">
-      <Name>AmplifierType</Name>
+      <Name>AmplifierType</Name> 
       <Definition>Indicates the type of amplifier.</Definition>
       <PropertyType>
         <TypePropertyEnumeratedValue>
           <EnumList name="PEnum_AudioVisualAmplifierType">
-            <EnumItem>FIXED</EnumItem>
+            <EnumItem>FIXED</EnumItem>    
             <EnumItem>VARIABLE</EnumItem>
             <EnumItem>OTHER</EnumItem>
-            <EnumItem>NOTKNOWN</EnumItem>
+            <EnumItem>NOTKNOWN</EnumItem> 
             <EnumItem>UNSET.</EnumItem>
           </EnumList>
         </TypePropertyEnumeratedValue>

@@ -9,8 +9,8 @@
 @prefix foaf:   	<http://xmlns.com/foaf/0.1/> .
 @prefix prod: <https://w3id.org/product#> .
 
-@prefix pset: <https://w3id.org/product/pset/> .
-@base <https://w3id.org/product/pset/> .
+@prefix props: <https://w3id.org/product/props/> .
+@base <https://w3id.org/product/props/> .
 
 voaf:Vocabulary a owl:Class .
 dcterms:title a owl:AnnotationProperty .
@@ -29,14 +29,14 @@ foaf:name a owl:DatatypeProperty .
 #################################
 # METADATA
 #################################
-<https://w3id.org/product/pset/> rdf:type voaf:Vocabulary , owl:Ontology ;
+<https://w3id.org/product/props/> rdf:type voaf:Vocabulary , owl:Ontology ;
     dcterms:title "IFC PSet Ontology"@en ;
     dcterms:description """Ontology automativally generated from IFC PSet specifications"""@en ;
     dcterms:creator <http://maxime-lefrancois.info/me#> ;
     dcterms:contributor [a foaf:Person ; foaf:name "Pieter Pauwels" ] ;
     dcterms:license <https://www.apache.org/licenses/LICENSE-2.0> ;
     vann:preferredNamespacePrefix "pset" ;
-    vann:preferredNamespaceUri <https://w3id.org/product/pset/> .
+    vann:preferredNamespaceUri <https://w3id.org/product/props/> .
 
 <http://maxime-lefrancois.info/me#> a foaf:Person ;
   foaf:name "Maxime Lefrançois"@en .

@@ -8,9 +8,8 @@ PREFIX owl: <http://www.w3.org/2002/07/owl#>
 PREFIX schema: <http://schema.org/>
 
 BASE <https://w3id.org/product/props/>
+
 GENERATE {
-
-    GENERATE <queries/IFC4-PropertyDef.rqg>
-    ITERATOR sgiter:XPath(?source, "//PropertyDef" ) AS ?property .
-
-} SOURCE <replace-with-source-url> AS ?source 
+  <{ ?name }> rdfs:comment ?{ strlang( sgfn:XPath(?nameAlias,"/DefinitionAlias/text()") ,  sgfn:XPath(?nameAlias,"/DefinitionAlias/@lang")  ) } .
+} 
+ITERATOR sgiter:XPath(?property, "/PropertyDef/DefinitionAliases/DefinitionAlias" ) AS ?nameAlias 
