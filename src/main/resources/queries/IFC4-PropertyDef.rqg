@@ -12,7 +12,7 @@ BASE <https://w3id.org/product/props/>
 GENERATE {
 
   <{ ?name }> a owl:DatatypeProperty ;
-    rdfs:label "{ ?name }"@en .
+    rdfs:label "{ ?name }"@en ;
     rdfs:comment  "{ sgfn:XPath(?property,"/PropertyDef/Definition/text()") }"@en .
 
     GENERATE <queries/IFC4-PropertyDef-domain.rqg> .

@@ -34,7 +34,7 @@ public class GenerateVocabulary {
     private static final Logger LOG = LogManager.getLogger(GenerateVocabulary.class);
     
     private static final String base = "https://w3id.org/product/props/";
-    private static final int MAX = 30;
+    private static final int MAX = Integer.MAX_VALUE;
 
     /**
      * @param args - arguments. Only the first argument is important: it must be absent, IFC4, or IFC2X3
