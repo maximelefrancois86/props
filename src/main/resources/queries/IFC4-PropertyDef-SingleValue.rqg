@@ -12,10 +12,12 @@ BASE <https://w3id.org/product/props/>
 
 GENERATE {
 
-  <{ ?name }> rdfs:range ?range .
+  <{ ?name }> a owl:DatatypeProperty ;
+    rdfs:range ?range .
   
 } WHERE {
   BIND( substr( sgfn:XPath(?property,"/PropertyDef/PropertyType/TypePropertySingleValue/DataType/@type") , 4 ) AS ?type)
+  FILTER( bound(?type) )
   BIND( IF( ?type = "Text" || ?type = "Label" || ?type = "Identifier" , xsd:string , 
         IF( ?type = "Boolean" || ?type = "Logical" , xsd:boolean , 
         IF( ?type = "Integer" , xsd:int , 
@@ -24,5 +26,5 @@ GENERATE {
         IF( ?type = "DateTime" , xsd:dateTime , 
         IF( ?type = "Time" , xsd:time , 
         IF( ?type = "Duration" , xsd:duration , 
-                <https://w3id.org/product/{ ?type }> ) ) ) ) ) ) ) ) AS ?range ) 
+                <https://w3id.org/measurement/{  concat( lcase( substr( ?type, 1, 1) ) , replace( substr( ?type, 2 ) , "Measure" , "" ) ) }> ) ) ) ) ) ) ) ) AS ?range ) 
 }

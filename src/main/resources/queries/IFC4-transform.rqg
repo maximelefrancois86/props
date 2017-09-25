@@ -14,3 +14,6 @@ GENERATE {
     ITERATOR sgiter:XPath(?source, "//PropertyDef" ) AS ?property .
 
 } SOURCE <replace-with-source-url> AS ?source 
+WHERE {
+  BIND( sgfn:XPath(?source, "/PropertySetDef/Name/text()") AS ?pset )
+}
