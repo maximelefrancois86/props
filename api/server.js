@@ -24,35 +24,42 @@ app.get('/id/:id', (req, res) => {
 
     var id = req.params.id;
 
+    var query = `
+    PREFIX props: <https://w3id.org/props#>
+    CONSTRUCT {
+        ?item a props:Property ;
+            rdfs:label ?label ;
+            schema:description ?description .
+    }
+    WHERE {
+        BIND(wd:Q487005 as ?item)
+        ?item rdfs:label ?label ;
+            schema:description ?description .
+    }`;
+
     const url = wdk.getWikidataIdsFromWikipediaTitles(id);
 
     res.setHeader('content-type', 'text/turtle');
 
-    rp(url).then(d => {
-        // Get the wikidata id
-        var data = JSON.parse(d);
-        var id = Object.keys(data.entities)[0];
+    const makeRequest = async () => {
+        try {
+            // Get wikidata id
+            var data = await rp(url);
+            var jsonData = JSON.parse(data);
+            var id = Object.keys(jsonData.entities)[0];
 
-        // // Get data about entity from wikidata
-        // var url = 'https://www.wikidata.org/entity/'+id;
+            // Do construct query on resource
+            var queryResult = await rp({uri: 'https://query.wikidata.org/sparql', qs: {query: query}, headers: {'Accept': 'text/turtle'}});
 
-        var query = `
-        PREFIX props: <https://w3id.org/props#>
-        CONSTRUCT {
-            ?item a props:Property ;
-                rdfs:label ?label .
+            // Return the data
+            res.send(queryResult);
+        } catch(err) {
+            res.status(500).send(err);
         }
-        WHERE {
-            BIND(wd:Q487005 as ?item)
-            ?item rdfs:label ?label
-        }
-        `
+    }
 
-        return rp({uri: 'https://query.wikidata.org/sparql', qs: {query: query}, headers: {'Accept': 'text/turtle'}});
-    }).then(data => {
-        // For now just return the whole thing
-        res.send(data);
-    })
+    makeRequest();
+
 });
 
 
