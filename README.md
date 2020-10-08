@@ -1,6 +1,6 @@
 # PSETGenerator
 
-Project for transforming buildingSMART PSets into OWL ontologies (datatype properties) using [SPARQL Generate](http://ci.emse.fr/sparql-generate/)
+Project for transforming buildingSMART PSets into OWL ontologies (datatype properties) using [SPARQL Generate](http://ci.mines-stetienne.fr/sparql-generate/)
 
 
 To get it running:
@@ -9,6 +9,7 @@ To get it running:
 ```
 git clone https://github.com/thesmartenergy/sparql-generate.git
 cd sparql-generate
+git checkout `git rev-list -1 --before="Sep 25 2017" master`
 mvn install
 
 cd ..
